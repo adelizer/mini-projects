@@ -2,6 +2,9 @@
 
 A dashboard showcasing all startups from Shark Tank Egypt episodes.
 
+![Dashboard Preview](./dashboard.png)
+
+
 ## Overview
 
 This project:
