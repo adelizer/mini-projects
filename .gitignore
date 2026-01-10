@@ -160,3 +160,6 @@ cython_debug/
 #.idea/
 
 data/
+
+# Analyzer output
+fireship-analyzer/output/

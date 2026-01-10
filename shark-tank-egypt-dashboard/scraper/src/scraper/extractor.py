@@ -1,13 +1,13 @@
 """Extract startup information from transcripts using LLM."""
 
+import hashlib
 import json
 import os
 from pathlib import Path
 from typing import Optional
-import hashlib
 
-from openai import OpenAI
 from dotenv import load_dotenv
+from openai import OpenAI
 
 from .models import Startup, Transcript, Video
 
@@ -49,9 +49,7 @@ class StartupExtractor:
         self.cache_dir = data_dir / "extraction_cache"
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-    def extract_startups(
-        self, transcript: Transcript, video: Video
-    ) -> list[Startup]:
+    def extract_startups(self, transcript: Transcript, video: Video) -> list[Startup]:
         """Extract startup information from a transcript."""
         # Check cache first
         cached = self._load_from_cache(transcript.video_id)
@@ -103,9 +101,7 @@ class StartupExtractor:
             print(f"Error extracting from {transcript.video_id}: {e}")
             return []
 
-    def _parse_startup(
-        self, data: dict, video: Video, index: int
-    ) -> Optional[Startup]:
+    def _parse_startup(self, data: dict, video: Video, index: int) -> Optional[Startup]:
         """Parse raw extraction data into Startup model."""
         name = data.get("name")
         name_ar = data.get("name_ar")
@@ -194,7 +190,9 @@ class StartupExtractor:
         cache_path = self._get_cache_path(video_id)
 
         with open(cache_path, "w", encoding="utf-8") as f:
-            json.dump([s.model_dump() for s in startups], f, ensure_ascii=False, indent=2)
+            json.dump(
+                [s.model_dump() for s in startups], f, ensure_ascii=False, indent=2
+            )
 
     def extract_all(
         self, transcripts: dict[str, Transcript], videos: dict[str, Video]

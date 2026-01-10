@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(uv sync:*)",
+      "Bash(mkdir:*)",
+      "Bash(uv run python:*)"
     ]
   }
 }
